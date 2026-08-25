@@ -1,5 +1,6 @@
 package com.socops.model;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -7,7 +8,13 @@ import java.util.List;
  *
  * @param direction      one of "row", "column", or "diagonal"
  * @param index          which row/column (0-4) or diagonal (0-1)
- * @param cellPositions  the five board indices that form this streak
+ * @param cellPositions  the five board indices that form this streak (immutable)
  */
 public record WinningStreak(String direction, int index, List<Integer> cellPositions) {
+    /**
+     * Compact constructor that ensures cellPositions is immutable.
+     */
+    public WinningStreak {
+        cellPositions = Collections.unmodifiableList(cellPositions);
+    }
 }
